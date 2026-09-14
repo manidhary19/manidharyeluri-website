@@ -1,0 +1,113 @@
+.nav-frame {
+  position: fixed;
+  z-index: 10;
+  background: #262424;
+  pointer-events: none;
+}
+
+.nav-frame-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+.nav-frame-left,
+.nav-frame-right {
+  top: 0;
+  bottom: 0;
+  width: 10px;
+}
+
+.nav-frame-left {
+  left: 0;
+}
+
+.nav-frame-right {
+  right: 0;
+}
+
+.nav-root {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+  mix-blend-mode: difference;
+  background: transparent;
+  width: 100%;
+}
+
+.nav-bar {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 40px;
+}
+
+.nav-letter-link {
+  text-decoration: none;
+  color: #fff;
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.3em;
+}
+
+.nav-letter-row {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.nav-letter {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-letter-inner {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-letter-dup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: inline-block;
+}
+
+.nav-letter-link:hover .nav-letter-inner {
+  transform: translateY(-100%);
+}
+
+.nav-overlay-menu {
+  pointer-events: none;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.nav-overlay-menu a {
+  color: #f2f2f2;
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.03em;
+  line-height: 1.3em;
+  text-decoration: none;
+}
+
+.nav-overlay-menu a span:last-child {
+  margin-left: 0.35em;
+}

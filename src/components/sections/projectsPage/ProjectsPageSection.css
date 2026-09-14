@@ -1,0 +1,214 @@
+.pp-main {
+  width: 100%;
+  background: #262424;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pp-hero {
+  background: #fff;
+  width: 100%;
+  min-height: 50vh;
+  padding: 160px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  z-index: 2;
+}
+
+.pp-hero-heading {
+  width: 100%;
+  max-width: 1600px;
+}
+
+.pp-hero h1 {
+  margin: 0;
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: 100px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1em;
+  color: #000;
+  white-space: nowrap;
+}
+
+.pp-list {
+  width: 100%;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pp-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 120vh;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.pp-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 100vh;
+  width: 100%;
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+
+.pp-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.pp-media-shift {
+  position: absolute;
+  inset: -37.5% 0;
+  width: 100%;
+  height: 175%;
+  background-size: cover;
+  background-position: center;
+}
+
+.pp-card {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  max-width: 1600px;
+  width: 74%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.pp-location {
+  margin: 0;
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  line-height: 1.3em;
+  text-transform: uppercase;
+  color: #262424;
+}
+
+.pp-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 24px;
+}
+
+.pp-card h2 {
+  margin: 0;
+  flex: 1 1 auto;
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: 50px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2em;
+  color: #262424;
+}
+
+.pp-cta {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.3em;
+  color: #262424;
+}
+
+.pp-cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 100px;
+  border: 1px solid #262424;
+  color: #262424;
+}
+
+.pp-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+@media (max-width: 1199.98px) {
+  .pp-hero {
+    padding: 60px 40px;
+  }
+
+  .pp-hero h1 {
+    font-size: 90px;
+  }
+
+  .pp-card h2 {
+    font-size: 40px;
+  }
+
+  .pp-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .pp-cta {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 809.98px) {
+  .pp-hero {
+    min-height: unset;
+    padding: 110px 40px 40px;
+  }
+
+  .pp-hero h1 {
+    font-size: 39px;
+    white-space: normal;
+  }
+
+  .pp-item {
+    height: auto;
+  }
+
+  .pp-sticky {
+    height: 70vh;
+    padding: 20px;
+  }
+
+  .pp-card {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .pp-row {
+    gap: 20px;
+  }
+}

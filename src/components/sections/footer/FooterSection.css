@@ -1,0 +1,149 @@
+.footer-root {
+  position: relative;
+  width: 100%;
+  height: 925px;
+  overflow: hidden;
+  background: #262424;
+}
+
+.footer-media {
+  position: absolute;
+  inset: 0;
+}
+
+.footer-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.footer-credits-top {
+  position: absolute;
+  top: 204px;
+  left: calc(50% - 520px);
+  width: 1040px;
+  height: 100px;
+}
+
+.footer-inner {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-inner-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1600px;
+}
+
+.footer-mark {
+  display: inline-flex;
+  text-decoration: none;
+  color: #f2f2f2;
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: clamp(28px, 5vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1em;
+  padding: 47px 16px;
+}
+
+.footer-mark-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.footer-mark-space {
+  width: 0.35em;
+}
+
+.footer-letter {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.footer-letter-inner {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-letter-dup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.footer-mark:hover .footer-letter-inner {
+  transform: translateY(-100%);
+}
+
+.footer-credits-bottom {
+  position: absolute;
+  bottom: 204px;
+  left: calc(50% - 520px);
+  width: 1040px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.footer-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 100px;
+  background: #f2f2f2;
+  color: #262424;
+  text-decoration: none;
+}
+
+.footer-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+@media (max-width: 809.98px) {
+  .footer-root {
+    height: auto;
+    min-height: 700px;
+  }
+
+  .footer-inner {
+    padding: 0 40px;
+  }
+
+  .footer-credits-bottom {
+    left: 0;
+    right: 0;
+    width: auto;
+    padding: 26px;
+    bottom: 80px;
+  }
+}
