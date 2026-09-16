@@ -4,8 +4,8 @@ import "./FooterSection.css";
 function LetterMark({ href, text }) {
   const chars = text.split("");
   return (
-    <a className="footer-mark" href={href}>
-      <span className="footer-mark-row">
+    <a className="footer-mark" href={href} aria-label={text}>
+      <span className="footer-mark-row" aria-hidden="true">
         {chars.map((ch, i) =>
           ch === " " ? (
             <span className="footer-mark-space" key={`sp-${i}`}>
@@ -13,7 +13,7 @@ function LetterMark({ href, text }) {
             </span>
           ) : (
             <span className="footer-letter" key={`${ch}-${i}`}>
-              <span className="footer-letter-inner">
+              <span className="footer-letter-inner" style={{ transitionDelay: `${i * 18}ms` }}>
                 <span>{ch}</span>
                 <span className="footer-letter-dup" aria-hidden="true">
                   {ch}
@@ -70,7 +70,7 @@ export default function FooterSection({
   return (
     <footer className="footer-root" data-pwc-critical={criticalRoot}>
       <div className="footer-media">
-        <img alt="" src="/assets/images/PFeu37XfmRDD8qPR4Zh3qblKc.png" />
+        <img alt="" src="/assets/images/footer-full.png" />
       </div>
       <div className="footer-credits-top" />
       <footer className="footer-inner" data-pwc-critical={criticalInner}>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { pageUrl } from "../../../lib/paths.js";
 import "./AboutPageSection.css";
+import MotionHeading from '../../MotionHeading.jsx';
 
 const VALUES = [
   {
@@ -118,6 +119,26 @@ const CERTS = [
   },
 ];
 
+const MOBILE_EDUCATION = [
+  {school:'University College Dublin',program:'Bachelors of Architecture',dates:'Sep 2023 - May 2026',body:'Earned a Bachelor of Architecture from University College Dublin, focusing on design, structural fundamentals, and digital modeling. Created detailed drawings and models to effectively communicate context-driven architectural solutions.'},
+  {school:'Mercer Technical Schools',program:'Certificate, A&ED',dates:'Sep 2021 - Jun 2023',body:'Earned an Architecture and Engineering certificate at Mercer County Technical Schools, developing skills in industry-standard software, 3D modeling, and technical drafting while gaining hands-on experience in construction methods and engineering workflows.'},
+];
+const MOBILE_JOBS = [
+  {title:'Sales Representative',org:'Vector Marketing',location:'Mercer,NJ',dates:'May 2025 - Sep 2025',bullets:[
+    ['Prospected',' and engaged over 120 prospective clients through strategic cold calling, referral outreach, and local networking initiatives, achieving a strong 60% conversion rate.'],
+    ['Delivered',' 50+ product demonstrations highlighting the features and benefits of Cutco’s premium kitchen tools, resulting in $3,000+ in direct sales revenue.'],
+    ['Developed',' customized sales strategies tailored to individual customer profiles, driving an 87% increase in upselling success and a 12% boost in average order value.'],
+    ['Demonstrated',' initiative and adaptability by consistently exceeding weekly sales targets by adapting to customer feedback, analyzing trends, and refining sales techniques to optimize performance and confidence.'],
+  ]},
+  ...EXPERIENCE.slice(2),
+  {title:'Production Associate',org:'Wingits Innovation',location:'Windsor, NJ',dates:'Nov 2022 - June 2023',bullets:[
+    ['Inspected',' goods for defects or damages, promptly notifying supervisors to address quality issues.'],
+    ['Recorded',' product information in inventory control systems and accurately completed necessary forms and documentation.'],
+    ['Assembled',' components using small tools and jigs, and packed finished products into shipping and delivery containers.'],
+    ['Enhanced',' team efficiency by 20% by unloading trucks, moving and organizing heavy materials, and improving error reporting, material handling, and overall workflow.'],
+  ]},
+];
+
 function useScrollProgress(ref) {
   const [progress, setProgress] = useState(0);
   useEffect(() => {
@@ -145,6 +166,31 @@ export default function AboutPageSection() {
   const valuesProgress = useScrollProgress(valuesRef);
   const valueIndex = Math.min(VALUES.length - 1, Math.floor(valuesProgress * VALUES.length));
   const [split, setSplit] = useState(50);
+  const renderedSplit = useRef(50);
+  useEffect(() => {
+    const element = compareRef.current;
+    const image = element.querySelector('.is-before');
+    const line = element.querySelector('.ap-compare-handle');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let frame;
+    let previous = performance.now();
+    const paint = value => {
+      // One sampled position controls both surfaces in the same frame.
+      renderedSplit.current = value;
+      image.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+      line.style.transform = `translateX(${value}%)`;
+    };
+    const tick = now => {
+      const elapsed = Math.min(64, now - previous);
+      previous = now;
+      const instant = reduced.matches || element.matches(':focus-visible');
+      const value = instant ? split : renderedSplit.current + (split - renderedSplit.current) * (1 - Math.exp(-elapsed / 70));
+      if (Math.abs(split - value) < .01) paint(split);
+      else { paint(value); frame = requestAnimationFrame(tick); }
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [split]);
 
   const setSplitFromEvent = (clientX) => {
     const el = compareRef.current;
@@ -164,17 +210,15 @@ export default function AboutPageSection() {
           />
         </div>
         <div className="ap-hero-copy">
-          <h1 className="ap-hero-title">About Me</h1>
+          <MotionHeading className="ap-hero-title" startDelay={350} stagger={80}>About Me</MotionHeading>
         </div>
       </section>
 
       <section className="ap-values" id="values" ref={valuesRef}>
         <div className="ap-values-sticky">
-          <div
-            className="ap-values-media"
-            style={{ backgroundImage: `url("${VALUES[valueIndex].image}")` }}
-          />
+          {VALUES.map((value,i)=><div key={value.id} className="ap-values-media" style={{backgroundImage:`url("${value.image}")`,opacity:i === valueIndex ? 1 : 0}} />)}
           <div className="ap-values-inner">
+            <h2 className="ap-values-title">VALUES°</h2>
             <div className="ap-values-copy">
               {VALUES.map((item, i) => (
                 <p key={item.id} id={item.id} className={i === valueIndex ? "is-active" : ""}>
@@ -201,6 +245,7 @@ export default function AboutPageSection() {
             aria-valuemax={100}
             aria-valuenow={Math.round(split)}
             aria-orientation="horizontal"
+            aria-label="Compare day and night architectural renderings"
             data-pwc-interaction="philosophy-compare"
             data-pwc-controlled="philosophy-compare"
             onPointerDown={(e) => {
@@ -208,11 +253,13 @@ export default function AboutPageSection() {
               setSplitFromEvent(e.clientX);
             }}
             onPointerMove={(e) => {
-              if (e.buttons) setSplitFromEvent(e.clientX);
+              if (e.pointerType === 'mouse' || e.buttons) setSplitFromEvent(e.clientX);
             }}
             onKeyDown={(e) => {
-              if (e.key === "ArrowLeft") setSplit((v) => Math.max(0, v - 2));
-              if (e.key === "ArrowRight") setSplit((v) => Math.min(100, v + 2));
+              if (e.key === "ArrowLeft") { e.preventDefault(); setSplit((v) => Math.max(0, v - 2)); }
+              if (e.key === "ArrowRight") { e.preventDefault(); setSplit((v) => Math.min(100, v + 2)); }
+              if (e.key === 'Home') { e.preventDefault();setSplit(0); }
+              if (e.key === 'End') { e.preventDefault();setSplit(100); }
             }}
           >
             <div
@@ -223,10 +270,10 @@ export default function AboutPageSection() {
               className="ap-compare-layer is-before"
               style={{
                 backgroundImage: 'url("/assets/images/Pde2xrxYU1EyFASUmp6IJNx0zsY.png")',
-                clipPath: `inset(0 ${100 - split}% 0 0)`,
+                clipPath: 'inset(0 50% 0 0)',
               }}
             />
-            <div className="ap-compare-handle" style={{ left: `${split}%` }} />
+            <div className="ap-compare-handle" style={{ transform: 'translateX(50%)' }} />
           </div>
         </div>
         <div id="pragraph-scroll" />
@@ -314,6 +361,17 @@ export default function AboutPageSection() {
             ))}
           </div>
         </div>
+      </section>
+      <section className="ap-mobile-resume">
+        <h3>EDUCATION°</h3>
+        {MOBILE_EDUCATION.map(ed=><article key={ed.school}>
+          <h2>{ed.school}</h2><div className="ap-mobile-meta"><span>{ed.program}</span><span>{ed.dates}</span></div><p>{ed.body}</p>
+        </article>)}
+        <h3>EXPERIENCE°</h3>
+        {MOBILE_JOBS.map(job=><article key={job.title}>
+          <h2>{job.title}</h2><div className="ap-mobile-meta"><span>{job.org}</span><span>{job.location}</span><span>{job.dates}</span></div>
+          <ul>{job.bullets.map(([lead,body])=><li key={lead}><strong>{lead}</strong>{body}</li>)}</ul>
+        </article>)}
       </section>
     </main>
   );

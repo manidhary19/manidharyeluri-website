@@ -1,5 +1,6 @@
 import { ArrowUpRightIcon } from "../about/icons.jsx";
 import "./ProjectsPageSection.css";
+import MotionHeading from '../../MotionHeading.jsx';
 
 const PROJECTS = [
   {
@@ -57,7 +58,7 @@ export default function ProjectsPageSection() {
     <main className="pp-main">
       <section className="pp-hero">
         <div className="pp-hero-heading">
-          <h1>Projects</h1>
+          <MotionHeading>Projects</MotionHeading>
         </div>
       </section>
       <section className="pp-list">
@@ -69,7 +70,6 @@ export default function ProjectsPageSection() {
                   className="pp-media-shift"
                   style={{
                     backgroundImage: `url("${project.image}")`,
-                    transform: `translate3d(0, ${project.shift}px, 0)`,
                   }}
                 />
               </div>

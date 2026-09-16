@@ -1,4 +1,5 @@
 import "./GallerySection.css";
+import MotionHeading from '../../MotionHeading.jsx';
 
 const COLUMNS = [
   [
@@ -57,7 +58,7 @@ export default function GallerySection() {
         />
         <div className="gp-hero-copy">
           <div className="gp-hero-top">
-            <h1>Gallery</h1>
+            <MotionHeading>Gallery</MotionHeading>
             <LetterLink href="https://monarchraw.framer.website/" label="MON_ARCH PHOTOGRAPHY" />
           </div>
         </div>
@@ -66,8 +67,8 @@ export default function GallerySection() {
         <div className="gp-grid">
           {COLUMNS.map((col, i) => (
             <div className="gp-col" key={i}>
-              {col.map((item) => (
-                <div className="gp-cell" style={{ height: item.height }} key={item.src}>
+              {col.map((item, row) => (
+                <div className="gp-cell" style={{ height: item.height, order: row * COLUMNS.length + i }} key={item.src}>
                   <div className="gp-cell-shift" style={{ backgroundImage: `url("${item.src}")` }} />
                 </div>
               ))}

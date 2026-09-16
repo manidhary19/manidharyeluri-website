@@ -88,10 +88,6 @@
   width: 100%;
 }
 
-.footer-mark:hover .footer-letter-inner {
-  transform: translateY(-100%);
-}
-
 .footer-credits-bottom {
   position: absolute;
   bottom: 204px;

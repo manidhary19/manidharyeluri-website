@@ -1,4 +1,5 @@
 import "./TechnologyPageSection.css";
+import MotionHeading from '../../MotionHeading.jsx';
 
 const ITEMS = [
   {
@@ -28,7 +29,7 @@ export default function TechnologyPageSection() {
     <main className="tp-main">
       <section className="tp-content">
         <div className="tp-heading">
-          <h1>Technology</h1>
+          <MotionHeading>Technology</MotionHeading>
         </div>
         <div className="tp-list">
           {ITEMS.map((item) => (

@@ -21,11 +21,11 @@ const OVERLAY = [
 
 function LetterLink({ href, label }) {
   return (
-    <a className="nav-letter-link" href={pageUrl(href)}>
+    <a className="nav-letter-link" href={pageUrl(href)} aria-label={label}>
       <span className="nav-letter-row">
         {label.split("").map((ch, i) => (
           <span className="nav-letter" key={`${ch}-${i}`}>
-            <span className="nav-letter-inner">
+            <span className="nav-letter-inner" style={{transitionDelay:`${i * 18}ms`}}>
               <span>{ch}</span>
               <span className="nav-letter-dup" aria-hidden="true">
                 {ch}
@@ -53,7 +53,7 @@ export default function NavigationSection() {
             <LetterLink key={item.label} href={item.href} label={item.label} />
           ))}
         </div>
-        <div className="nav-overlay-menu">
+        <div className="nav-overlay-menu" aria-hidden="true" inert="">
           {OVERLAY.map((item, i) => (
             <a key={`${item.label}-${i}`} href={pageUrl(item.href)}>
               <span>{item.label}</span>
