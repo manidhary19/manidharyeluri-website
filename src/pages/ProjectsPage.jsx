@@ -11,7 +11,7 @@ export default function ProjectsPage() {
       <div data-pwc-section="section">
         <ProjectsPageSection />
       </div>
-      <div data-pwc-section="footer">
+      <div className="projects-footer" data-pwc-section="footer">
         <FooterSection criticalRoot="footer-1" criticalInner="footer-2" />
       </div>
     </>

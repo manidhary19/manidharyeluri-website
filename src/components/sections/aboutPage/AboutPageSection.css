@@ -132,6 +132,21 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.02em;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 250ms var(--ease-out),
+    visibility 0s linear 250ms;
+}
+
+.ap-projects-btn.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 250ms var(--ease-out),
+    visibility 0s linear 0s;
 }
 
 .ap-projects-btn-alt {
@@ -175,7 +190,7 @@
   overflow: hidden;
   cursor: ew-resize;
   user-select: none;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 .ap-compare-layer {
@@ -408,6 +423,13 @@
 }
 
 @media (max-width: 809.98px) {
+  .ap-projects-btn {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
+  }
+
   .ap-split {
     grid-template-columns: 1fr;
   }
@@ -424,5 +446,12 @@
   .ap-certs {
     padding-left: 24px;
     padding-right: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ap-projects-btn,
+  .ap-projects-btn.is-visible {
+    transition-duration: 150ms, 0s;
   }
 }

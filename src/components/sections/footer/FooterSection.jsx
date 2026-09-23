@@ -1,4 +1,5 @@
 import { pageUrl } from "../../../lib/paths.js";
+import { MailIcon } from "../about/icons.jsx";
 import "./FooterSection.css";
 
 function LetterMark({ href, text }) {
@@ -24,17 +25,6 @@ function LetterMark({ href, text }) {
         )}
       </span>
     </a>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="footer-icon" aria-hidden="true">
-      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 8 L13 13.7 C13.62 14.06 14.38 14.06 15 13.7 L24 8" transform="translate(-2 0)" />
-        <rect x="4" y="6" width="16" height="12" rx="2" />
-      </g>
-    </svg>
   );
 }
 
@@ -81,7 +71,7 @@ export default function FooterSection({
       <div className="footer-credits-bottom">
         <div className="footer-icons">
           <a className="footer-icon-btn" href="mailto:manidhary19@gmail.com" aria-label="Email">
-            <MailIcon />
+            <MailIcon className="footer-icon" />
           </a>
           <a
             className="footer-icon-btn"

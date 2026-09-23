@@ -163,6 +163,7 @@ function useScrollProgress(ref) {
 export default function AboutPageSection() {
   const valuesRef = useRef(null);
   const compareRef = useRef(null);
+  const compareGesture = useRef({ pointerId: null, startX: 0, startY: 0, axis: null });
   const valuesProgress = useScrollProgress(valuesRef);
   const valueIndex = Math.min(VALUES.length - 1, Math.floor(valuesProgress * VALUES.length));
   const [split, setSplit] = useState(50);
@@ -200,6 +201,53 @@ export default function AboutPageSection() {
     setSplit(Math.min(100, Math.max(0, next)));
   };
 
+  const beginCompareGesture = (event) => {
+    if (event.pointerType === 'touch') {
+      compareGesture.current = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        axis: null,
+      };
+      return;
+    }
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setSplitFromEvent(event.clientX);
+  };
+
+  const moveCompareGesture = (event) => {
+    if (event.pointerType !== 'touch') {
+      if (event.pointerType === 'mouse' || event.buttons) setSplitFromEvent(event.clientX);
+      return;
+    }
+
+    const gesture = compareGesture.current;
+    if (gesture.pointerId !== event.pointerId || gesture.axis === 'vertical') return;
+    const deltaX = event.clientX - gesture.startX;
+    const deltaY = event.clientY - gesture.startY;
+
+    if (!gesture.axis) {
+      if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 8) return;
+      gesture.axis = Math.abs(deltaX) > Math.abs(deltaY) ? 'horizontal' : 'vertical';
+    }
+
+    if (gesture.axis === 'horizontal') {
+      if (!event.currentTarget.hasPointerCapture(event.pointerId)) {
+        event.currentTarget.setPointerCapture(event.pointerId);
+      }
+      setSplitFromEvent(event.clientX);
+    }
+  };
+
+  const endCompareGesture = (event) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    if (compareGesture.current.pointerId === event.pointerId) {
+      compareGesture.current = { pointerId: null, startX: 0, startY: 0, axis: null };
+    }
+  };
+
   return (
     <main className="ap-main">
       <section className="ap-hero" id="hero" data-pwc-critical="hero-1">
@@ -226,7 +274,10 @@ export default function AboutPageSection() {
                 </p>
               ))}
             </div>
-            <a className="ap-projects-btn" href={pageUrl("/projects")}>
+            <a
+              className={`ap-projects-btn${valueIndex === VALUES.length - 1 ? " is-visible" : ""}`}
+              href={pageUrl("/projects")}
+            >
               <span>ALL PROJECTS</span>
               <span className="ap-projects-btn-alt">EXPLORE</span>
             </a>
@@ -248,13 +299,10 @@ export default function AboutPageSection() {
             aria-label="Compare day and night architectural renderings"
             data-pwc-interaction="philosophy-compare"
             data-pwc-controlled="philosophy-compare"
-            onPointerDown={(e) => {
-              e.currentTarget.setPointerCapture(e.pointerId);
-              setSplitFromEvent(e.clientX);
-            }}
-            onPointerMove={(e) => {
-              if (e.pointerType === 'mouse' || e.buttons) setSplitFromEvent(e.clientX);
-            }}
+            onPointerDown={beginCompareGesture}
+            onPointerMove={moveCompareGesture}
+            onPointerUp={endCompareGesture}
+            onPointerCancel={endCompareGesture}
             onKeyDown={(e) => {
               if (e.key === "ArrowLeft") { e.preventDefault(); setSplit((v) => Math.max(0, v - 2)); }
               if (e.key === "ArrowRight") { e.preventDefault(); setSplit((v) => Math.min(100, v + 2)); }

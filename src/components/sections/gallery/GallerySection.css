@@ -42,7 +42,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  pointer-events: none;
 }
+
+.gp-letter-link { pointer-events: auto; }
 
 .gp-hero-top {
   width: 100%;
@@ -143,6 +146,8 @@
   position: relative;
   width: 100%;
   overflow: hidden;
+  display: block;
+  background: #000;
 }
 
 .gp-cell-shift {

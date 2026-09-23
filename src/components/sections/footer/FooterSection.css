@@ -1,4 +1,6 @@
 .footer-root {
+  --footer-control-offset: clamp(52px, 8vh, 72px);
+  --footer-control-offset: clamp(52px, 8dvh, 72px);
   position: relative;
   width: 100%;
   height: 925px;
@@ -29,7 +31,8 @@
 
 .footer-inner {
   position: absolute;
-  top: 50%;
+  top: calc(100% - 50vh - var(--footer-control-offset));
+  top: calc(100% - 50dvh - var(--footer-control-offset));
   left: 0;
   right: 0;
   transform: translateY(-50%);
@@ -73,6 +76,8 @@
 .footer-letter {
   display: inline-block;
   overflow: hidden;
+  padding-inline: 0.06em;
+  margin-inline: -0.06em;
 }
 
 .footer-letter-inner {
@@ -90,13 +95,16 @@
 
 .footer-credits-bottom {
   position: absolute;
-  bottom: 204px;
+  top: calc(100% - 50vh + var(--footer-control-offset));
+  top: calc(100% - 50dvh + var(--footer-control-offset));
+  bottom: auto;
   left: calc(50% - 520px);
   width: 1040px;
   height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateY(-50%);
 }
 
 .footer-icons {
@@ -125,7 +133,15 @@
   display: block;
 }
 
+.projects-footer .footer-root {
+  height: max(925px, 100svh);
+}
+
 @media (max-width: 809.98px) {
+  .projects-footer .footer-root {
+    height: max(800px, 100svh);
+  }
+
   .footer-root {
     height: auto;
     min-height: 700px;
@@ -140,6 +156,6 @@
     right: 0;
     width: auto;
     padding: 26px;
-    bottom: 80px;
+    bottom: auto;
   }
 }

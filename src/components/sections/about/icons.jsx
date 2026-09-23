@@ -2,8 +2,8 @@ export function MailIcon({ className }) {
   return (
     <svg className={className} viewBox="0 0 24 24" role="presentation" aria-hidden="true">
       <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 11 L13.009 16.727 C13.63 17.088 14.397 17.088 15.018 16.727 L24 11" transform="translate(-2 -4)" />
-        <path d="M4 8 C4 6.895 4.895 6 6 6 L22 6 C23.105 6 24 6.895 24 8 L24 20 C24 21.105 23.105 22 22 22 L6 22 C4.895 22 4 21.105 4 20 Z" />
+        <path d="M20 0 L11.009 5.727 C10.388 6.088 9.621 6.088 9 5.727 L0 0" transform="translate(2 7)" />
+        <path d="M2 16 C0.895 16 0 15.105 0 14 L0 2 C0 0.895 0.895 0 2 0 L18 0 C19.105 0 20 0.895 20 2 L20 14 C20 15.105 19.105 16 18 16 Z" transform="translate(2 4)" />
       </g>
     </svg>
   );

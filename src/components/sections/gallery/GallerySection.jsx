@@ -1,5 +1,7 @@
 import "./GallerySection.css";
 import MotionHeading from '../../MotionHeading.jsx';
+import ImageLightbox from '../../ImageLightbox.jsx';
+import { useState } from 'react';
 
 const COLUMNS = [
   [
@@ -20,6 +22,16 @@ const COLUMNS = [
     { src: "/assets/images/WALNLoUh2MJHe5NskCWNpZCg3XE.jpg", height: 422 },
     { src: "/assets/images/jcnUYWj3WqYOvH3rb7uMuY1UrB0.jpg", height: 500 },
   ],
+];
+
+const HERO = {
+  src: "/assets/images/B0kmKugrGmNSEkiBR6Rb6uxroj8.jpg",
+  alt: "Warm-toned architectural space with layered wooden elements and diffused light",
+};
+
+const GALLERY_IMAGES = [
+  HERO,
+  ...COLUMNS.flat().map((item, index) => ({ src: item.src, alt: `Gallery photograph ${index + 1}` })),
 ];
 
 function LetterLink({ href, label }) {
@@ -48,14 +60,13 @@ function LetterLink({ href, label }) {
 }
 
 export default function GallerySection() {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   return (
     <main className="gp-main">
       <section className="gp-hero" id="hero" data-pwc-critical="hero-1">
-        <img
-          className="gp-hero-media"
-          alt="Warm-toned architectural space with layered wooden elements and diffused light"
-          src="/assets/images/B0kmKugrGmNSEkiBR6Rb6uxroj8.jpg"
-        />
+        <button className="gp-hero-open" type="button" onClick={() => setLightboxIndex(0)} aria-label="Open gallery hero image full screen">
+          <img className="gp-hero-media" alt={HERO.alt} src={HERO.src} />
+        </button>
         <div className="gp-hero-copy">
           <div className="gp-hero-top">
             <MotionHeading>Gallery</MotionHeading>
@@ -68,14 +79,15 @@ export default function GallerySection() {
           {COLUMNS.map((col, i) => (
             <div className="gp-col" key={i}>
               {col.map((item, row) => (
-                <div className="gp-cell" style={{ height: item.height, order: row * COLUMNS.length + i }} key={item.src}>
+                <button className="gp-cell" type="button" onClick={() => setLightboxIndex(1 + COLUMNS.slice(0, i).reduce((sum, column) => sum + column.length, 0) + row)} aria-label={`Open gallery photograph ${COLUMNS.slice(0, i).reduce((sum, column) => sum + column.length, 0) + row + 1} full screen`} style={{ height: item.height, order: row * COLUMNS.length + i }} key={item.src}>
                   <div className="gp-cell-shift" style={{ backgroundImage: `url("${item.src}")` }} />
-                </div>
+                </button>
               ))}
             </div>
           ))}
         </div>
       </section>
+      <ImageLightbox images={GALLERY_IMAGES} index={lightboxIndex} onIndexChange={setLightboxIndex} onClose={() => setLightboxIndex(null)} label="Gallery" />
     </main>
   );
 }

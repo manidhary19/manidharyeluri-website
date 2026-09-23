@@ -1,5 +1,6 @@
 import "./AboutSection.css";
 import { ArrowUpRightIcon, IconButton, LinkedInIcon, MailIcon } from "./icons.jsx";
+import HeroContours from "./HeroContours.jsx";
 
 const PROJECTS = [
   {
@@ -29,20 +30,22 @@ export default function AboutSection() {
   return (
     <main className="about-main">
       <section className="about-hero" id="hero" data-pwc-critical="hero-1">
-        <div className="about-hero-copy">
-          <div className="about-hero-title-wrap">
-            <h1 className="about-hero-title">
-              Manidhar Yeluri
-              <br />
-              Portfolio
-            </h1>
+        <div className="about-hero-sticky">
+          <div className="about-hero-copy">
+            <div className="about-hero-title-wrap">
+              <h1 className="about-hero-title">
+                Manidhar Yeluri
+                <br />
+                Portfolio
+              </h1>
+            </div>
           </div>
-        </div>
-        <div className="about-hero-media" id="mza0ue">
-          <img
-            alt="Curved white staircase with dramatic natural light in a modernist interior"
-            src="/assets/images/GaJUFPEVKhnToN8GVkwDOL8Q0o.jpg"
-          />
+          <div className="about-hero-media" id="mza0ue">
+            <HeroContours
+              alt="Topographic contour drawing of white lines on black"
+              src="/assets/images/GaJUFPEVKhnToN8GVkwDOL8Q0o.jpg"
+            />
+          </div>
         </div>
       </section>
 
