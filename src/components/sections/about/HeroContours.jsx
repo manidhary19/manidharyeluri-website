@@ -3,6 +3,16 @@ import { useLayoutEffect, useRef } from "react";
 const DATA_URL = `${import.meta.env.BASE_URL}assets/data/hero-contours.bin`;
 const STROKE = "#e2e2e2";
 const LINE_WIDTH = 2.2;
+// Share of the pinned scroll runway (~2 screens) used by each phase:
+// contours draw until DRAW_END (~1.5 screens), the finished drawing holds
+// until PHOTO_START, then the photo fades in over the rest.
+const DRAW_END = 0.75;
+const PHOTO_START = 0.875;
+// Lines near the centre are too short to register and the outermost ones are
+// cropped off-canvas, so on screen the drawing only changes between ~10% and
+// ~80% of the line schedule. Spend the draw phase on exactly that window.
+const VISIBLE_START = 0.1;
+const VISIBLE_END = 0.8;
 
 // Binary layout (little-endian): "CTR1", u16 width, u16 height, u32 count,
 // then count × u16 point counts, then all points as u16 x,y pairs.
@@ -90,11 +100,15 @@ export default function HeroContours({ src, alt }) {
       raf = 0;
       if (!data || !transform) return;
       const travelled = hero ? -hero.getBoundingClientRect().top : scrollY;
-      const next = Math.max(0, Math.min(1, travelled / drawDistance));
+      const runway = Math.max(0, Math.min(1, travelled / drawDistance));
+      // The photo keeps updating through the hold/fade even once lines are complete.
+      img.style.opacity = Math.max(0, Math.min(1, (runway - PHOTO_START) / (1 - PHOTO_START)));
+      // Past DRAW_END, finish the off-canvas tails too (not visible).
+      const next = runway <= 0 ? 0 : runway >= DRAW_END ? 1
+        : VISIBLE_START + (VISIBLE_END - VISIBLE_START) * (runway / DRAW_END);
       if (next === progress) return;
       if (next < progress || progress < 0) reset();
       progress = next;
-      img.style.opacity = Math.max(0, Math.min(1, (next - 0.82) / 0.18));
       ctx.setTransform(transform.a, 0, 0, transform.a, transform.ox, transform.oy);
       ctx.lineWidth = LINE_WIDTH;
       ctx.lineCap = "round";
