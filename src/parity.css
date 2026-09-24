@@ -166,7 +166,7 @@ a:focus-visible,[role=slider]:focus-visible{outline:2px solid currentColor;outli
  /* Mobile uses the viewport edge as the canvas edge: no desktop safety frame. */
  html,body,#root{width:100%;max-width:100%;overflow-x:clip}
  .nav-frame{display:none}
- .about-hero{padding:0;height:160svh}
+ .about-hero{padding:0;height:300svh}
  .about-hero-sticky{top:0;height:100svh}
  .about-project-sticky{position:relative;height:70svh}
  .about-project-media{inset:0;height:100%;transform:none;will-change:auto}
