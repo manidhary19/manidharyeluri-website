@@ -26,7 +26,7 @@ const EXPERIENCE = [
     title: "Architectural Research Intern",
     org: "Trinity College Dublin",
     location: "Dublin, IE",
-    dates: "June 2026 - Present",
+    dates: "June 2026 - July 2026",
     bullets: [
       ["Conducted", " a post-occupancy evaluation of 15 student study spaces across 5 typologies, assessing acoustics, spatial legibility and sensory conditions against 85 neuro-inclusive design criteria to inform accessibility improvements."],
       ["Ran", " on-site fieldwork combining instrument readings (light, temperature, sound), photographic documentation, and building records, scoring each space 1–5 against the PAS 6463:2022 Design for the Mind standard."],
@@ -85,7 +85,7 @@ const EDUCATION = [
     school: "University College Dublin",
     program: "Masters of Architecture",
     dates: "Sep 2026 - May 2028",
-    body: "",
+    body: "Pursuing a Master of Architecture at University College Dublin, I focus on the adaptive reuse of existing buildings and the development of sustainable design strategies. My work examines how environmental performance, material longevity, and contextual sensitivity can inform contemporary interventions within historic and aging structures. I design architecture that reflects this mission: structures that honor what already exists while introducing thoughtful, future‑focused solutions.",
   },
   {
     school: "University College Dublin",
