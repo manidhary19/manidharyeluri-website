@@ -3,7 +3,9 @@
   --footer-control-offset: clamp(52px, 8dvh, 72px);
   position: relative;
   width: 100%;
-  height: 925px;
+  /* At least one full screen, so nothing above shows once fully scrolled. */
+  height: max(925px, 100vh);
+  height: max(925px, 100lvh);
   overflow: hidden;
   background: #262424;
 }
@@ -134,12 +136,14 @@
 }
 
 .projects-footer .footer-root {
-  height: max(925px, 100svh);
+  height: max(925px, 100vh);
+  height: max(925px, 100lvh);
 }
 
 @media (max-width: 809.98px) {
   .projects-footer .footer-root {
-    height: max(800px, 100svh);
+    height: max(800px, 100vh);
+    height: max(800px, 100lvh);
   }
 
   .footer-root {
