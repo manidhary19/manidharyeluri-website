@@ -55,7 +55,7 @@ export default function AboutSection() {
             <div className="about-bio-photo">
               <div
                 className="about-bio-photo-img"
-                style={{ backgroundImage: 'url("/assets/images/ULfXbV5b49xpDxjUaySIEr3L8.png")' }}
+                style={{ backgroundImage: 'url("/assets/images/manidhar-portrait.jpg")' }}
                 role="img"
                 aria-label="Portrait of Manidhar Yeluri"
               />
