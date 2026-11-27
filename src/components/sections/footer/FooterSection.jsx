@@ -76,6 +76,8 @@ export default function FooterSection({
           <a
             className="footer-icon-btn"
             href="https://ie.linkedin.com/in/manidhary19"
+            target="_blank"
+            rel="noreferrer"
             aria-label="LinkedIn"
           >
             <LinkedInIcon />
@@ -83,6 +85,8 @@ export default function FooterSection({
           <a
             className="footer-icon-btn"
             href="https://arrivaldetailing.framer.website/"
+            target="_blank"
+            rel="noreferrer"
             aria-label="Arrival Detailing"
           >
             <ChatIcon />

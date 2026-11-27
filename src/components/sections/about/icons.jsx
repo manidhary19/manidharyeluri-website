@@ -33,8 +33,14 @@ export function ArrowUpRightIcon({ className }) {
 }
 
 export function IconButton({ href, label, children, light }) {
+  const external = /^https?:\/\//.test(href);
   return (
-    <a className={`about-icon-btn${light ? " is-light" : ""}`} href={href} aria-label={label}>
+    <a
+      className={`about-icon-btn${light ? " is-light" : ""}`}
+      href={href}
+      aria-label={label}
+      {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+    >
       {children}
     </a>
   );
